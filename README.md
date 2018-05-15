@@ -12,12 +12,12 @@ Command line script, that uses Jenkins' API to get a list of jobs and their stat
  - sudo pip3 install virtualenv
 
 ## Execution
-Once all Pre-requisites done, Follow below steps to execute
+Once all Pre-requisites are done, Follow below steps to execute
 
 ### Clone the repo
  - git clone https://github.com/vijayrathore8492/python-jenkins.git
 
-### Execute secript
+### Execute script
  - cd python-jenkins
  - source jenenv/bin/activate
  - python3 manage.py <jenkins_instance> <username> <password>
@@ -41,4 +41,4 @@ Once all Pre-requisites done, Follow below steps to execute
 ```
 
 ## PS
-  - This is my first script Python. I have tried my best to keep standards, but may have missed some.
+  - This is my first script Python. I have tried my best to keep standards but may have missed some.
