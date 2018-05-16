@@ -5,9 +5,11 @@ Command line script, that uses Jenkins' API to get a list of jobs and their stat
   - Built on Python3
 
 ## Pre-requisities
-  - **virtualenv**
+  - python3
+  - virtualenv
 
-## Install pre-requisities
+## Install pre-requisities [on ubuntu 16.04]
+ - sudo apt-get install python3
  - sudo apt-get install python3-pip python3-dev
  - sudo pip3 install virtualenv
 
@@ -28,6 +30,7 @@ Once all Pre-requisites are done, Follow below steps to execute
 ## DB tables
 ### jobs [job status table]
  - id INT PRIMARY KEY
+ - instance CHAR(200) NOT NULL
  - name CHAR(100) NOT NULL
  - is_running INT NOT NULL
  - is_queued INT NOT NULL
@@ -36,7 +39,6 @@ Once all Pre-requisites are done, Follow below steps to execute
 
 ## DIR structure
 ```
- - [jenenv]                         #Python virtual environment
  - manage.py                        #Main application logic
  - README.md                        #this
  - jenkins_job.db                   #sqlite DB

@@ -35,8 +35,8 @@ def get_job_details(args):
     jobs = []
     for job_name, job_instance in server.get_jobs():
         params = {}
+        params['instance'] = args[1]
         params['name'] = job_instance.name
-        params['description'] = job_instance.get_description()
         params['is_running'] = 1 if job_instance.is_running() else 0
         params['is_enabled'] = 1 if job_instance.is_enabled() else 0
         params['is_queued'] = 1 if job_instance.is_queued() else 0
@@ -44,20 +44,32 @@ def get_job_details(args):
     
     #if jobs got saved in db or not
     if save_in_database(jobs):
-        print("Job status added in database successfully.")
+        print("Following jobs added in database successfully.")
+        for job in jobs:
+            print("-----------------------------------------")
+            print("instance   : {}".format(job['instance']))
+            print("name       : {}".format(job['name']))
+            print("is_running : {}".format(job['is_running']))
+            print("is_enabled : {}".format(job['is_enabled']))
+            print("is_queued  : {}".format(job['is_queued']))
+            print("-----------------------------------------")
+            
         sys.exit(0)
     else:
         sys.exit("Failed to save jobs in database")
 
 def save_in_database(jobs):
+    """
+    Insert job details in DB
+    """
     #connect db
     conn = sqlite3.connect('jenkins_job.db')
 
     # Insert data
     try:
         for params in jobs:
-            args = (params['name'], params['is_running'], params['is_queued'], params['is_enabled'], int(time.time()))
-            conn.execute("INSERT INTO jobs (name,is_running,is_queued,is_enabled,timestamp) VALUES (?,?,?,?,?)",args)
+            args = (params['instance'],params['name'], params['is_running'], params['is_queued'], params['is_enabled'], int(time.time()))
+            conn.execute("INSERT INTO jobs (instance,name,is_running,is_queued,is_enabled,timestamp) VALUES (?,?,?,?,?,?)",args)
         # Save (commit) the changes
         conn.commit()
     except:
