@@ -2,7 +2,7 @@ from jenkinsapi.jenkins import Jenkins
 import sys
 import sqlite3
 import time
-from requests.exceptions import HTTPError
+from requests import exceptions
 
 def get_server_instance(args):
     """
@@ -16,9 +16,12 @@ def get_server_instance(args):
         sys.exit("Run with correct parameters. eg.`python3 manage.py http://instance username paswword`")
     try:
         server = Jenkins(jenkins_url, username=username, password=password)
-    except HTTPError:
+    except exceptions.HTTPError:
         sys.exit("Unable to connect to given jenkins instance.")
-
+    except exceptions.MissingSchema:
+        sys.exit("Invalid jenkins instance given.Please correct")
+    except exceptions.ConnectionError:
+        sys.exit("Unable to connect to given jenkins instance.")
     return server
 
 def get_job_details(args):
