@@ -19,8 +19,11 @@ Once all Pre-requisites are done, Follow below steps to execute
 
 ### Execute script
  - cd python-jenkins
- - source jenenv/bin/activate
+ - virtualenv appenv
+ - source appenv/bin/activate
+ - pip3 install -r requirements.txt
  - python3 manage.py <jenkins_instance> <username> <password>
+  - eg:- python3 manage.py http://localhost:8080 admin admin
 
 ## DB tables
 ### jobs [job status table]
