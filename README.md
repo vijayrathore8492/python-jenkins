@@ -24,7 +24,7 @@ Once all Pre-requisites are done, Follow below steps to execute
  - virtualenv appenv
  - source appenv/bin/activate
  - pip3 install -r requirements.txt
- - python3 manage.py <jenkins_instance> <username> <password>
+ - python3 manage.py <jenkins_instance> <username> <password> [run inside virtualenv only]
   - eg:- python3 manage.py http://localhost:8080 admin admin
 
 ## DB tables
